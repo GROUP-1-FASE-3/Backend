@@ -1,16 +1,15 @@
 package repository
 
 import (
+	"github.com/GROUP-1-FASE-3/Backend/features/user"
 	"gorm.io/gorm"
 )
 
 type User struct {
 	gorm.Model
 	User_Name    string
-	Email        string
+	Email        string `gorm:"unique"`
 	Password     string
-	Gender       string
-	Phone_Number string
 	User_Images  string
 	CreditCard   CreditCard
 	Reservations []Reservation
@@ -65,4 +64,13 @@ type Rating struct {
 	UserID  uint
 	Rating  string
 	Comment string
+}
+
+func UserCoreToModel(data user.UserCore) User {
+	userData := User{
+		User_Name: data.User_Name,
+		Email:     data.Email,
+		Password:  data.Password,
+	}
+	return userData
 }
