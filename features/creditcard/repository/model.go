@@ -1,6 +1,9 @@
 package repository
 
-import "gorm.io/gorm"
+import (
+	"github.com/GROUP-1-FASE-3/Backend/features/creditcard"
+	"gorm.io/gorm"
+)
 
 type CreditCard struct {
 	gorm.Model
@@ -33,4 +36,17 @@ type Reservation struct {
 	VillaID      uint
 	UserID       uint
 	CreditCardID uint
+}
+
+func fromCore(dataCore creditcard.CoreCreditCard) CreditCard {
+	creditcardGorm := CreditCard{
+		Type:   dataCore.Type,
+		Name:   dataCore.Name,
+		Number: dataCore.Number,
+		Cvv:    dataCore.Cvv,
+		Month:  dataCore.Month,
+		Year:   dataCore.Year,
+		UserID: dataCore.User.ID,
+	}
+	return creditcardGorm
 }
