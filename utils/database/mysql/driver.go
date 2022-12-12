@@ -6,7 +6,7 @@ import (
 
 	"github.com/GROUP-1-FASE-3/Backend/config"
 
-	// creditcardRepo "github.com/GROUP-1-FASE-3/Backend/features/creditcard/repository"
+	creditcardRepo "github.com/GROUP-1-FASE-3/Backend/features/creditcard/repository"
 	// ratingRepo "github.com/GROUP-1-FASE-3/Backend/features/rating/repository"
 	// reservationRepo "github.com/GROUP-1-FASE-3/Backend/features/reservation/repository"
 	// villaRepo "github.com/GROUP-1-FASE-3/Backend/features/villa/repository"
@@ -29,9 +29,9 @@ func InitDB(cfg *config.AppConfig) *gorm.DB {
 
 func DBMigration(db *gorm.DB) {
 	db.AutoMigrate(&userRepo.User{})
-	// db.AutoMigrate(&villaRepo.Team{})
-	// db.AutoMigrate(&creditcardRepo.Class{})
-	// db.AutoMigrate(&reservationRepo.Mentee{})
-	// db.AutoMigrate(&ratingRepo.Feedback{})
+	// db.AutoMigrate(&villaRepo.Villa{})
+	db.AutoMigrate(&creditcardRepo.CreditCard{})
+	// db.AutoMigrate(&reservationRepo.Reservation{})
+	// db.AutoMigrate(&ratingRepo.Rating{})
 
 }
