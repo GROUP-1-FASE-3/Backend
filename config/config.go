@@ -5,6 +5,7 @@ import (
 	"os"
 	"strconv"
 	"sync"
+	// "github.com/joho/godotenv"
 )
 
 type AppConfig struct {
@@ -40,7 +41,7 @@ func initConfig() *AppConfig {
 	// 	}
 	// }
 
-	// SECRET = os.Getenv("SECRET")
+	// // SECRET = os.Getenv("SECRET")
 	cnv, err := strconv.Atoi(os.Getenv("SERVER_PORT"))
 	if err != nil {
 		log.Fatal("Cannot parse DB Server_Port variable")
