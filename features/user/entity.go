@@ -9,8 +9,10 @@ type UserCore struct {
 
 type RepositoryInterface interface {
 	Create(input UserCore) (row int, err error)
+	Delete(data UserCore, id int) (row int, err error)
 }
 
 type ServiceInterface interface {
 	Create(input UserCore) (err error)
+	Delete(data UserCore, id int) (err error)
 }

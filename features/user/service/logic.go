@@ -36,3 +36,12 @@ func (s *userService) Create(data user.UserCore) (err error) {
 	}
 	return nil
 }
+
+func (s *userService) Delete(data user.UserCore, id int) (err error) {
+	_, errDelete := s.userRepository.Delete(data, id)
+	if errDelete != nil {
+		return errors.New("error delete")
+	}
+
+	return nil
+}
