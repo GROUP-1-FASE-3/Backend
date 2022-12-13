@@ -41,10 +41,10 @@ type User struct {
 
 type Rating struct {
 	gorm.Model
-	VillaID uint
-	UserID  uint
 	Rating  uint
 	Comment string
+	VillaID uint
+	UserID  uint
 }
 
 type Reservation struct {
