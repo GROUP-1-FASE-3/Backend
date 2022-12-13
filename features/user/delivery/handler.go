@@ -20,6 +20,7 @@ func New(service user.ServiceInterface, e *echo.Echo) {
 	}
 	e.POST("/users", handler.Create, middlewares.JWTMiddleware())
 	e.DELETE("/users/:id", handler.Delete, middlewares.JWTMiddleware())
+	e.GET("/users/:id", handler.GetByID, middlewares.JWTMiddleware())
 }
 
 func (d *UserDelivery) Create(c echo.Context) error {
@@ -46,4 +47,15 @@ func (d *UserDelivery) Delete(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.FailedResponse("data not found"))
 	}
 	return c.JSON(http.StatusOK, helper.SuccessResponse("success delete user by id"))
+}
+
+func (d *UserDelivery) GetByID(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+	result, err := d.userService.GetByID(id)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("error read data"))
+	}
+	dataResp := fromCore(result)
+
+	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success get user data by id", dataResp))
 }

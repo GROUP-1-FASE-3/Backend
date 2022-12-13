@@ -76,3 +76,14 @@ func UserCoreToModel(data user.UserCore) User {
 	}
 	return userData
 }
+
+func (dataModel *User) toCore() user.UserCore {
+	return user.UserCore{
+		ID:           dataModel.ID,
+		User_Name:    dataModel.User_Name,
+		Email:        dataModel.Email,
+		Gender:       dataModel.Gender,
+		Phone_Number: dataModel.Phone_Number,
+		User_Images:  dataModel.User_Images,
+	}
+}
