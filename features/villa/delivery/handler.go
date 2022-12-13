@@ -2,6 +2,7 @@ package delivery
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/GROUP-1-FASE-3/Backend/features/villa"
 	"github.com/GROUP-1-FASE-3/Backend/middlewares"
@@ -19,6 +20,7 @@ func New(service villa.ServiceInterface, e *echo.Echo) {
 	}
 	e.POST("/villas", handler.Create, middlewares.JWTMiddleware())
 	e.GET("/villas", handler.GetAll, middlewares.JWTMiddleware())
+	e.GET("/villas/:id", handler.GetById, middlewares.JWTMiddleware())
 }
 
 // Post New Villa
@@ -48,3 +50,20 @@ func (delivery *VillaDelivery) GetAll(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success read all users", dataResponse))
 }
+
+// Get by ID
+func (delivery *VillaDelivery) GetById(c echo.Context) error {
+	id, errBind := strconv.Atoi(c.Param("id"))
+	if errBind != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "+errBind.Error()))
+	}
+
+	IdVilla, err := delivery.villaService.GetById(id)
+	dataResponse := fromCore(IdVilla)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "+errBind.Error()))
+	}
+	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success get users", dataResponse))
+}
+
+//Update

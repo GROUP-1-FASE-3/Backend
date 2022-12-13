@@ -40,3 +40,15 @@ func (repo *villaRepository) GetAll() (data []villa.CoreVilla, err error) {
 	var dataCore = toCoreList(villas)
 	return dataCore, nil
 }
+
+func (repo *villaRepository) GetById(id int) (data villa.CoreVilla, err error) {
+	var IdVilla Villa
+	var IdVillaCore = villa.CoreVilla{}
+	IdVilla.ID = uint(id)
+	tx := repo.db.Preload("Team").First(&IdVilla, IdVilla.ID)
+	if tx.Error != nil {
+		return IdVillaCore, tx.Error
+	}
+	IdVillaCore = IdVilla.toCore()
+	return IdVillaCore, nil
+}
