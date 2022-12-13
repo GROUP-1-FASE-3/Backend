@@ -37,3 +37,12 @@ func (service *villaService) GetAll() (data []villa.CoreVilla, err error) {
 	return
 
 }
+
+// Get by ID
+func (service *villaService) GetById(id int) (data villa.CoreVilla, err error) {
+	data, errGet := service.villaRepository.GetById(id)
+	if errGet != nil {
+		return data, errors.New("failed get user by id data, error query")
+	}
+	return data, nil
+}
