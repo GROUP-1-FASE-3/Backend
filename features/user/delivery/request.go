@@ -8,7 +8,7 @@ type UserRequest struct {
 	Password     string `json:"password" form:"password"`
 	Gender       string `json:"gender" form:"gender"`
 	Phone_Number string `json:"phone_number" form:"phone_number"`
-	User_images  string `form:"user_images"`
+	User_images  string `form:"user_images" form:"user_images"`
 }
 
 func toCore(data UserRequest) user.UserCore {
