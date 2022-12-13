@@ -33,7 +33,7 @@ func (repo *villaRepository) Create(input villa.CoreVilla) (row int, err error) 
 func (repo *villaRepository) GetAll() (data []villa.CoreVilla, err error) {
 	var villas []Villa
 
-	tx := repo.db.Find(&villas)
+	tx := repo.db.Preload("Users").Preload("Ratings").Find(&villas)
 	if tx.Error != nil {
 		return nil, tx.Error
 	}
@@ -46,7 +46,7 @@ func (repo *villaRepository) GetById(id int) (data villa.CoreVilla, err error) {
 	var IdVilla Villa
 	var IdVillaCore = villa.CoreVilla{}
 	IdVilla.ID = uint(id)
-	tx := repo.db.Preload("Team").First(&IdVilla, IdVilla.ID)
+	tx := repo.db.Preload("Users").Preload("Ratings").First(&IdVilla, IdVilla.ID)
 	if tx.Error != nil {
 		return IdVillaCore, tx.Error
 	}
@@ -65,4 +65,18 @@ func (repo *villaRepository) UpdateVilla(datacore villa.CoreVilla, id int) (err 
 		return errors.New("update villa failed")
 	}
 	return nil
+}
+
+// Delete
+func (repo *villaRepository) DeleteVilla(id int) (row int, err error) {
+	idVilla := Villa{}
+
+	tx := repo.db.Delete(&idVilla, id)
+	if tx.Error != nil {
+		return -1, tx.Error
+	}
+	if tx.RowsAffected == 0 {
+		return -1, errors.New("delete villa by id, failed")
+	}
+	return int(tx.RowsAffected), nil
 }
