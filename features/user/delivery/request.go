@@ -3,12 +3,12 @@ package delivery
 import "github.com/GROUP-1-FASE-3/Backend/features/user"
 
 type UserRequest struct {
-	User_Name    string `json:"user_name" form:"full_name"`
+	User_Name    string `json:"user_name" form:"user_name"`
 	Email        string `json:"email" form:"email"`
 	Password     string `json:"password" form:"password"`
 	Gender       string `json:"gender" form:"gender"`
 	Phone_Number string `json:"phone_number" form:"phone_number"`
-	User_images  string `json:"user_images" form:"user_images"`
+	User_Images  string `json:"user_images" form:"user_images"`
 }
 
 func toCore(data UserRequest) user.UserCore {
