@@ -1,10 +1,13 @@
 package user
 
 type UserCore struct {
-	ID        uint
-	User_Name string `validate:"required"`
-	Email     string `validate:"required,email"`
-	Password  string `validate:"required"`
+	ID           uint
+	User_Name    string `validate:"required"`
+	Email        string `validate:"required,email"`
+	Password     string `validate:"required"`
+	Gender       string
+	Phone_Number string
+	User_Images  string
 }
 
 type RepositoryInterface interface {
