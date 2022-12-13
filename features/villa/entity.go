@@ -3,7 +3,7 @@ package villa
 type CoreVilla struct {
 	ID             uint
 	Villa_Name     string
-	Price          string
+	Price          uint
 	Description    string
 	Address        string
 	Villa_Images1  string
