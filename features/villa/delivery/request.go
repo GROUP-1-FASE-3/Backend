@@ -22,13 +22,13 @@ type VillaRequest struct {
 
 func toCore(data VillaRequest) villa.CoreVilla {
 	return villa.CoreVilla{
-		Villa_Name:     data.Villa_Name,
-		Price:          data.Price,
-		Description:    data.Description,
-		Address:        data.Address,
-		Villa_Images1:  data.Villa_Images1,
-		Villa_Images2:  data.Villa_Images2,
-		Villa_Images3:  data.Villa_Images3,
+		Villa_Name:  data.Villa_Name,
+		Price:       data.Price,
+		Description: data.Description,
+		Address:     data.Address,
+		// Villa_Images1:  data.Villa_Images1,
+		// Villa_Images2:  data.Villa_Images2,
+		// Villa_Images3:  data.Villa_Images3,
 		Detail_Guest:   data.Detail_Guest,
 		Detail_Bedroom: data.Detail_Bedroom,
 		Detail_Bed:     data.Detail_Bed,
