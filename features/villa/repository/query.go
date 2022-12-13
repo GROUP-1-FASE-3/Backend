@@ -28,3 +28,15 @@ func (repo *villaRepository) Create(input villa.CoreVilla) (row int, err error) 
 	}
 	return int(tx.RowsAffected), nil
 }
+
+// GetAll implements user.Repository
+func (repo *villaRepository) GetAll() (data []villa.CoreVilla, err error) {
+	var villas []Villa
+
+	tx := repo.db.Preload("Team").Find(&villas)
+	if tx.Error != nil {
+		return nil, tx.Error
+	}
+	var dataCore = toCoreList(villas)
+	return dataCore, nil
+}

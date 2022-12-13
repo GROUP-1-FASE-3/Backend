@@ -64,7 +64,7 @@ type Rating struct {
 	gorm.Model
 	VillaID uint
 	UserID  uint
-	Rating  string
+	Rating  uint
 	Comment string
 }
 

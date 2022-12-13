@@ -17,6 +17,7 @@ type CoreVilla struct {
 	Detail_Pool    string
 	Detail_Wifi    string
 	User           CoreUser
+	Rating         CoreRating
 }
 
 type CoreUser struct {
@@ -24,10 +25,17 @@ type CoreUser struct {
 	User_Name string
 }
 
+type CoreRating struct {
+	ID     uint
+	Rating uint
+}
+
 type ServiceInterface interface {
 	Create(input CoreVilla) (err error)
+	GetAll() (data []CoreVilla, err error)
 }
 
 type RepositoryInterface interface {
 	Create(input CoreVilla) (row int, err error)
+	GetAll() (data []CoreVilla, err error)
 }

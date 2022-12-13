@@ -30,3 +30,10 @@ func (service *villaService) Create(input villa.CoreVilla) (err error) {
 	}
 	return nil
 }
+
+// GetAll implements villa.ServiceInterface
+func (service *villaService) GetAll() (data []villa.CoreVilla, err error) {
+	data, err = service.villaRepository.GetAll()
+	return
+
+}

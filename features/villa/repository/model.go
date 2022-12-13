@@ -24,6 +24,8 @@ type Villa struct {
 	UserID         uint
 	Ratings        []Rating
 	Reservations   []Reservation
+	Rating         Rating
+	User           User
 }
 
 type User struct {
@@ -41,7 +43,7 @@ type Rating struct {
 	gorm.Model
 	VillaID uint
 	UserID  uint
-	Rating  string
+	Rating  uint
 	Comment string
 }
 
@@ -77,3 +79,61 @@ func fromCore(dataCore villa.CoreVilla) Villa {
 	}
 	return villaGorm
 }
+
+// mengubah struct model gorm ke struct core
+func (dataModel *Villa) toCore() villa.CoreVilla {
+	return villa.CoreVilla{
+		ID:             dataModel.ID,
+		Villa_Name:     dataModel.Villa_Name,
+		Price:          dataModel.Price,
+		Description:    dataModel.Description,
+		Address:        dataModel.Address,
+		Villa_Images1:  dataModel.Villa_Images1,
+		Villa_Images2:  dataModel.Villa_Images2,
+		Villa_Images3:  dataModel.Villa_Images3,
+		Detail_Guest:   dataModel.Detail_Guest,
+		Detail_Bedroom: dataModel.Detail_Bedroom,
+		Detail_Bed:     dataModel.Detail_Bed,
+		Detail_Bath:    dataModel.Detail_Bath,
+		Detail_Kitchen: dataModel.Detail_Kitchen,
+		Detail_Pool:    dataModel.Detail_Pool,
+		Detail_Wifi:    dataModel.Detail_Wifi,
+		User: villa.CoreUser{
+			ID:        dataModel.User.ID,
+			User_Name: dataModel.User.User_Name,
+		},
+		Rating: villa.CoreRating{
+			ID:     dataModel.Rating.ID,
+			Rating: dataModel.Rating.Rating,
+		},
+		// Rating: toCoreListRating(dataModel.Rating),
+	}
+}
+
+// mengubah slice struct model gorm ke slice struct core
+func toCoreList(dataModel []Villa) []villa.CoreVilla {
+	var dataCore []villa.CoreVilla
+	for _, v := range dataModel {
+		dataCore = append(dataCore, v.toCore())
+	}
+	return dataCore
+}
+
+// Append to CoreRating
+
+// func (dataModel *Rating) toCore() villa.CoreRating {
+// 	return villa.CoreRating{
+// 		ID:     dataModel.ID,
+// 		Rating: dataModel.Rating,
+// 	}
+// }
+
+// func toCoreListRating(dataModel []Rating) []villa.CoreRating {
+// 	var dataCore []villa.CoreRating
+// 	for _, v := range dataModel {
+// 		dataCore = append(dataCore, v.toCore())
+// 	}
+// 	return dataCore
+// }
+
+//--------------
