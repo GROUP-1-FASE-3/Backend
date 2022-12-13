@@ -45,3 +45,11 @@ func (s *userService) Delete(data user.UserCore, id int) (err error) {
 
 	return nil
 }
+
+func (s *userService) GetByID(id int) (data user.UserCore, err error) {
+	dataCore, errData := s.userRepository.GetByID(id)
+	if errData != nil {
+		return user.UserCore{}, errData
+	}
+	return dataCore, nil
+}

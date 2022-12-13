@@ -44,3 +44,17 @@ func (r *userRepository) Delete(data user.UserCore, id int) (row int, err error)
 
 	return int(tx.RowsAffected), nil
 }
+
+func (r *userRepository) GetByID(id int) (data user.UserCore, err error) {
+	var user User
+
+	tx := r.db.First(&user, id)
+
+	if tx.Error != nil {
+		return data, errors.New("data not found")
+	}
+
+	userCore := user.toCore()
+
+	return userCore, nil
+}
