@@ -41,6 +41,7 @@ func (repo *villaRepository) GetAll() (data []villa.CoreVilla, err error) {
 	return dataCore, nil
 }
 
+// Get by Id
 func (repo *villaRepository) GetById(id int) (data villa.CoreVilla, err error) {
 	var IdVilla Villa
 	var IdVillaCore = villa.CoreVilla{}
@@ -51,4 +52,17 @@ func (repo *villaRepository) GetById(id int) (data villa.CoreVilla, err error) {
 	}
 	IdVillaCore = IdVilla.toCore()
 	return IdVillaCore, nil
+}
+
+// Update
+func (repo *villaRepository) UpdateVilla(datacore villa.CoreVilla, id int) (err error) {
+	villaGorm := fromCore(datacore)
+	tx := repo.db.Where("id= ?", id).Updates(villaGorm)
+	if tx.Error != nil {
+		return tx.Error
+	}
+	if tx.RowsAffected == 0 {
+		return errors.New("update villa failed")
+	}
+	return nil
 }

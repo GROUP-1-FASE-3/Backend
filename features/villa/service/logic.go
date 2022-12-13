@@ -46,3 +46,13 @@ func (service *villaService) GetById(id int) (data villa.CoreVilla, err error) {
 	}
 	return data, nil
 }
+
+// Update
+func (service *villaService) UpdateVilla(dataCore villa.CoreVilla, id int) (err error) {
+	errUpdate := service.villaRepository.UpdateVilla(dataCore, id)
+	if errUpdate != nil {
+		return errors.New("failed update data, error query")
+	}
+	return nil
+
+}
