@@ -29,3 +29,18 @@ func (r *userRepository) Create(input user.UserCore) (row int, err error) {
 	}
 	return int(tx.RowsAffected), nil
 }
+
+func (r *userRepository) Delete(data user.UserCore, id int) (row int, err error) {
+	userGorm := UserCoreToModel(data)
+
+	tx := r.db.Delete(&userGorm, id)
+	if tx.Error != nil {
+		return -1, errors.New("data not found")
+	}
+
+	if tx.RowsAffected == 0 {
+		return 0, errors.New("data not found")
+	}
+
+	return int(tx.RowsAffected), nil
+}
