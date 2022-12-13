@@ -18,7 +18,7 @@ type Rating struct {
 type User struct {
 	gorm.Model
 	User_Name    string
-	Email        string
+	Email        string `gorm:"unique"`
 	Password     string
 	Gender       string
 	Phone_Number string
