@@ -10,6 +10,8 @@ type User struct {
 	User_Name    string
 	Email        string `gorm:"unique"`
 	Password     string
+	Gender       string
+	Phone_Number string
 	User_Images  string
 	CreditCard   CreditCard
 	Reservations []Reservation
