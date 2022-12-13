@@ -29,7 +29,7 @@ func (repo *villaRepository) Create(input villa.CoreVilla) (row int, err error) 
 	return int(tx.RowsAffected), nil
 }
 
-// GetAll implements user.Repository
+// GetAll implements villa.Repository
 func (repo *villaRepository) GetAll() (data []villa.CoreVilla, err error) {
 	var villas []Villa
 
