@@ -21,6 +21,7 @@ func New(service villa.ServiceInterface, e *echo.Echo) {
 	e.POST("/villas", handler.Create, middlewares.JWTMiddleware())
 	e.GET("/villas", handler.GetAll, middlewares.JWTMiddleware())
 	e.GET("/villas/:id", handler.GetById, middlewares.JWTMiddleware())
+	e.PUT("/villas/:id", handler.UpdateData, middlewares.JWTMiddleware())
 }
 
 // Post New Villa
@@ -66,4 +67,23 @@ func (delivery *VillaDelivery) GetById(c echo.Context) error {
 	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success get users", dataResponse))
 }
 
-//Update
+// Update
+func (delivery *VillaDelivery) UpdateData(c echo.Context) error {
+	id, errConv := strconv.Atoi(c.Param("id"))
+	if errConv != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error conv data "+errConv.Error()))
+	}
+
+	villaInput := VillaRequest{}
+	errBind := c.Bind(&villaInput)
+	if errBind != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "+errBind.Error()))
+	}
+
+	dataCore := toCore(villaInput)
+	errUpt := delivery.villaService.UpdateVilla(dataCore, id)
+	if errUpt != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error Db update "+errUpt.Error()))
+	}
+	return c.JSON(http.StatusOK, helper.SuccessResponse("success update data"))
+}

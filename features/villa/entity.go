@@ -34,10 +34,14 @@ type ServiceInterface interface {
 	Create(input CoreVilla) (err error)
 	GetAll() (data []CoreVilla, err error)
 	GetById(id int) (data CoreVilla, err error)
+	UpdateVilla(input CoreVilla, id int) (err error)
+	DeleteVilla(id int) (err error)
 }
 
 type RepositoryInterface interface {
 	Create(input CoreVilla) (row int, err error)
 	GetAll() (data []CoreVilla, err error)
 	GetById(id int) (data CoreVilla, err error)
+	UpdateVilla(input CoreVilla, id int) (err error)
+	DeleteVilla(id int) (row int, err error)
 }
