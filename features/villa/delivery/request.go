@@ -3,13 +3,13 @@ package delivery
 import "github.com/GROUP-1-FASE-3/Backend/features/villa"
 
 type VillaRequest struct {
-	Villa_Name     string `json:"villa_name" form:"villa_name"`
-	Price          uint   `json:"price" form:"price"`
-	Description    string `json:"description" form:"description"`
-	Address        string `json:"address" form:"address"`
-	Villa_Images1  string `json:"villa_images1" form:"villa_images1"`
-	Villa_Images2  string `json:"villa_images2" form:"villa_images2"`
-	Villa_Images3  string `json:"villa_images3" form:"villa_images3"`
+	Villa_Name  string `json:"villa_name" form:"villa_name"`
+	Price       uint   `json:"price" form:"price"`
+	Description string `json:"description" form:"description"`
+	Address     string `json:"address" form:"address"`
+	// Villa_Images1  string `json:"villa_images1" form:"villa_images1"`
+	// Villa_Images2  string `json:"villa_images2" form:"villa_images2"`
+	// Villa_Images3  string `json:"villa_images3" form:"villa_images3"`
 	Detail_Guest   uint   `json:"detail_guest" form:"detail_guest"`
 	Detail_Bedroom uint   `json:"detail_bedroom" form:"detail_bedroom"`
 	Detail_Bed     uint   `json:"detail_bed" form:"detail_bed"`
