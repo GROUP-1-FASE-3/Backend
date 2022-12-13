@@ -5,7 +5,7 @@ import "github.com/GROUP-1-FASE-3/Backend/features/villa"
 type VillaResponse struct {
 	ID             uint           `json:"id"`
 	Villa_Name     string         `json:"vila_name"`
-	Price          string         `json:"price"`
+	Price          uint           `json:"price"`
 	Description    string         `json:"description"`
 	Address        string         `json:"address"`
 	Villa_Images1  string         `json:"villa_images1"`

@@ -4,7 +4,7 @@ import "github.com/GROUP-1-FASE-3/Backend/features/villa"
 
 type VillaRequest struct {
 	Villa_Name     string `json:"villa_name" form:"villa_name"`
-	Price          string `json:"price" form:"price"`
+	Price          uint   `json:"price" form:"price"`
 	Description    string `json:"description" form:"description"`
 	Address        string `json:"address" form:"address"`
 	Villa_Images1  string `json:"villa_images1" form:"villa_images1"`
