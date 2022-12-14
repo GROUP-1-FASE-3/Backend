@@ -33,7 +33,7 @@ func (repo *villaRepository) Create(input villa.CoreVilla) (row int, err error) 
 func (repo *villaRepository) GetAll() (data []villa.CoreVilla, err error) {
 	var villas []Villa
 
-	tx := repo.db.Preload("Ratings").Find(&villas)
+	tx := repo.db.Joins("Users").Preload("Ratings").Find(&villas)
 	if tx.Error != nil {
 		return nil, tx.Error
 	}
