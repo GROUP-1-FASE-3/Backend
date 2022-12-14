@@ -97,7 +97,7 @@ func (delivery *VillaDelivery) GetAllByID(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, helper.FailedResponse("error read data"))
 	}
 
-	dataResponse := fromCoreListU(results)
+	dataResponse := fromCoreList(results)
 
 	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success read all users", dataResponse))
 }
