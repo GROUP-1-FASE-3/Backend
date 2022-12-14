@@ -79,42 +79,10 @@ func fromCore(dataCore villa.CoreVilla) VillaResponse {
 	}
 }
 
-func fromCoreU(dataCore villa.CoreVilla) VillaResponseU {
-	return VillaResponseU{
-		ID:             dataCore.ID,
-		Villa_Name:     dataCore.Villa_Name,
-		Price:          dataCore.Price,
-		Description:    dataCore.Description,
-		Address:        dataCore.Address,
-		Villa_Images1:  dataCore.Villa_Images1,
-		Villa_Images2:  dataCore.Villa_Images2,
-		Villa_Images3:  dataCore.Villa_Images3,
-		Detail_Guest:   dataCore.Detail_Guest,
-		Detail_Bedroom: dataCore.Detail_Bedroom,
-		Detail_Bed:     dataCore.Detail_Bed,
-		Detail_Bath:    dataCore.Detail_Bath,
-		Detail_Kitchen: dataCore.Detail_Kitchen,
-		Detail_Pool:    dataCore.Detail_Pool,
-		Detail_Wifi:    dataCore.Detail_Wifi,
-		Users: UserResponse{
-			ID:        dataCore.User.ID,
-			User_Name: dataCore.User.User_Name,
-		},
-	}
-}
-
 func fromCoreList(dataCore []villa.CoreVilla) []VillaResponse {
 	var dataResponse []VillaResponse
 	for _, v := range dataCore {
 		dataResponse = append(dataResponse, fromCore(v))
-	}
-	return dataResponse
-}
-
-func fromCoreListU(dataCore []villa.CoreVilla) []VillaResponseU {
-	var dataResponse []VillaResponseU
-	for _, v := range dataCore {
-		dataResponse = append(dataResponse, fromCoreU(v))
 	}
 	return dataResponse
 }
