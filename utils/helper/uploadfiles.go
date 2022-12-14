@@ -93,7 +93,7 @@ func UploadVilla(c echo.Context, field string) (string, error) {
 
 	input := &s3manager.UploadInput{
 		Bucket:      aws.String(os.Getenv("AWS_BUCKET_NAME")),                         // bucket's name
-		Key:         aws.String("testvilla/" + randomStr + "-" + fileheader.Filename), // files destination location
+		Key:         aws.String("fotovilla/" + randomStr + "-" + fileheader.Filename), // files destination location
 		Body:        file,                                                             // content of the file
 		ContentType: aws.String("image/jpg"),                                          // content type
 	}
