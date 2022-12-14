@@ -25,7 +25,7 @@ type Reservation struct {
 type User struct {
 	gorm.Model
 	User_Name    string
-	Email        string
+	Email        string `gorm:"type:varchar(200)"`
 	Password     string
 	Gender       string
 	Phone_Number string
