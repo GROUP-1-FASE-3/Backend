@@ -5,7 +5,7 @@ import (
 
 	"github.com/GROUP-1-FASE-3/Backend/config"
 
-	"github.com/golang-jwt/jwt/v4"
+	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )

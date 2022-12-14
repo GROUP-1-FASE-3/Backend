@@ -17,9 +17,9 @@ import (
 	creditcardRepo "github.com/GROUP-1-FASE-3/Backend/features/creditcard/repository"
 	creditcardService "github.com/GROUP-1-FASE-3/Backend/features/creditcard/service"
 
-	// reservationDelivery "github.com/GROUP-1-FASE-3/Backend/features/reservation/delivery"
-	// reservationRepo "github.com/GROUP-1-FASE-3/Backend/features/reservation/repository"
-	// reservationService "github.com/GROUP-1-FASE-3/Backend/features/reservation/service"
+	reservationDelivery "github.com/GROUP-1-FASE-3/Backend/features/reservation/delivery"
+	reservationRepo "github.com/GROUP-1-FASE-3/Backend/features/reservation/repository"
+	reservationService "github.com/GROUP-1-FASE-3/Backend/features/reservation/service"
 
 	ratingDelivery "github.com/GROUP-1-FASE-3/Backend/features/rating/delivery"
 	ratingRepo "github.com/GROUP-1-FASE-3/Backend/features/rating/repository"
@@ -47,9 +47,9 @@ func InitFactory(e *echo.Echo, db *gorm.DB) {
 	creditcardServiceFactory := creditcardService.New(creditcardRepoFactory)
 	creditcardDelivery.New(creditcardServiceFactory, e)
 
-	// reservationRepoFactory := reservationRepo.New(db)
-	// reservationServiceFactory := reservationService.New(reservationRepoFactory)
-	// reservationDelivery.New(reservationServiceFactory, e)
+	reservationRepoFactory := reservationRepo.New(db)
+	reservationServiceFactory := reservationService.New(reservationRepoFactory)
+	reservationDelivery.New(reservationServiceFactory, e)
 
 	ratingRepoFactory := ratingRepo.New(db)
 	ratingServiceFactory := ratingService.New(ratingRepoFactory)

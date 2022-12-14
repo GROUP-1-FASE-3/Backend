@@ -21,3 +21,9 @@ func SuccessWithDataResponse(msg string, data any) map[string]any {
 		"data":    data,
 	}
 }
+
+func CheckResponse(msg string) map[string]any {
+	return map[string]any{
+		"message": msg,
+	}
+}

@@ -8,8 +8,7 @@ import (
 
 	creditcardRepo "github.com/GROUP-1-FASE-3/Backend/features/creditcard/repository"
 	ratingRepo "github.com/GROUP-1-FASE-3/Backend/features/rating/repository"
-
-	// reservationRepo "github.com/GROUP-1-FASE-3/Backend/features/reservation/repository"
+	reservationRepo "github.com/GROUP-1-FASE-3/Backend/features/reservation/repository"
 	villaRepo "github.com/GROUP-1-FASE-3/Backend/features/villa/repository"
 
 	userRepo "github.com/GROUP-1-FASE-3/Backend/features/user/repository"
@@ -32,7 +31,7 @@ func DBMigration(db *gorm.DB) {
 	db.AutoMigrate(&userRepo.User{})
 	db.AutoMigrate(&villaRepo.Villa{})
 	db.AutoMigrate(&creditcardRepo.CreditCard{})
-	// db.AutoMigrate(&reservationRepo.Reservation{})
+	db.AutoMigrate(&reservationRepo.Reservation{})
 	db.AutoMigrate(&ratingRepo.Rating{})
 
 }
