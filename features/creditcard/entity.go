@@ -18,8 +18,14 @@ type CoreUser struct {
 
 type ServiceInterface interface {
 	Create(input CoreCreditCard) (err error)
+	GetById(id int) (data CoreCreditCard, err error)
+	UpdateCreditCard(input CoreCreditCard, id int) (err error)
+	DeleteCreditCard(id int) (err error)
 }
 
 type RepositoryInterface interface {
 	Create(input CoreCreditCard) (row int, err error)
+	GetById(id int) (data CoreCreditCard, err error)
+	UpdateCreditCard(input CoreCreditCard, id int) (err error)
+	DeleteCreditCard(id int) (row int, err error)
 }
