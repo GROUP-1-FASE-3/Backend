@@ -1,5 +1,7 @@
 package villa
 
+import "github.com/labstack/echo/v4"
+
 type CoreVilla struct {
 	ID             uint
 	Villa_Name     string
@@ -31,7 +33,7 @@ type CoreRating struct {
 }
 
 type ServiceInterface interface {
-	Create(input CoreVilla) (err error)
+	Create(input CoreVilla, c echo.Context) (err error)
 	GetAll() (data []CoreVilla, err error)
 	GetById(id int) (data CoreVilla, err error)
 	UpdateVilla(input CoreVilla, id int) (err error)
