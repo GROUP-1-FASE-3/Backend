@@ -3,30 +3,25 @@ package villa
 import "github.com/labstack/echo/v4"
 
 type CoreVilla struct {
-	ID             uint
-	Villa_Name     string
-	Price          uint
-	Description    string
-	Address        string
-	Villa_Images1  string
-	Villa_Images2  string
-	Villa_Images3  string
-	Detail_Guest   uint
-	Detail_Bedroom uint
-	Detail_Bed     uint
-	Detail_Bath    uint
-	Detail_Kitchen string
-	Detail_Pool    string
-	Detail_Wifi    string
-	User           CoreUser
-	Rating         CoreRating
+	ID               uint
+	Villa_Name       string
+	Price            uint
+	Description      string
+	Address          string
+	Villa_Images1    string
+	Villa_Images2    string
+	Villa_Images3    string
+	Detail_Guest     uint
+	Detail_Bedroom   uint
+	Detail_Bed       uint
+	Detail_Bath      uint
+	Detail_Kitchen   string
+	Detail_Pool      string
+	Detail_Wifi      string
+	Detail_Workspace string
+	UserID           uint
+	Rating           CoreRating
 }
-
-type CoreUser struct {
-	ID        uint
-	User_Name string
-}
-
 type CoreRating struct {
 	ID     uint
 	Rating uint
