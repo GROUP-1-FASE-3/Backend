@@ -18,6 +18,7 @@ type CreditCard struct {
 }
 
 type User struct {
+	gorm.Model
 	User_Name    string
 	Email        string
 	Password     string
@@ -49,4 +50,43 @@ func fromCore(dataCore creditcard.CoreCreditCard) CreditCard {
 		UserID: dataCore.User.ID,
 	}
 	return creditcardGorm
+}
+
+// mengubah struct model gorm ke struct core
+func (dataModel *CreditCard) toCore() creditcard.CoreCreditCard {
+	return creditcard.CoreCreditCard{
+		ID:     dataModel.ID,
+		Type:   dataModel.Type,
+		Name:   dataModel.Name,
+		Number: dataModel.Number,
+		Cvv:    dataModel.Cvv,
+		Month:  dataModel.Month,
+		Year:   dataModel.Year,
+	}
+}
+
+// to Core User
+func (dataModel2 *User) toCore2() creditcard.CoreUser {
+	return creditcard.CoreUser{
+		ID:        dataModel2.ID,
+		User_Name: dataModel2.User_Name,
+	}
+}
+
+// mengubah slice struct model gorm ke slice struct core
+func toCoreList(dataModel []CreditCard) []creditcard.CoreCreditCard {
+	var dataCore []creditcard.CoreCreditCard
+	for _, v := range dataModel {
+		dataCore = append(dataCore, v.toCore())
+	}
+	return dataCore
+}
+
+// append to CoreUser
+func toCoreList2(dataModel2 []User) []creditcard.CoreUser {
+	var dataCore2 []creditcard.CoreUser
+	for _, v := range dataModel2 {
+		dataCore2 = append(dataCore2, v.toCore2())
+	}
+	return dataCore2
 }
