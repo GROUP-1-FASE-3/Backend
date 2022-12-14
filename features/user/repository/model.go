@@ -70,9 +70,12 @@ type Rating struct {
 
 func UserCoreToModel(data user.UserCore) User {
 	userData := User{
-		User_Name: data.User_Name,
-		Email:     data.Email,
-		Password:  data.Password,
+		User_Name:    data.User_Name,
+		Email:        data.Email,
+		Password:     data.Password,
+		Gender:       data.Gender,
+		Phone_Number: data.Phone_Number,
+		User_Images:  data.User_Images,
 	}
 	return userData
 }

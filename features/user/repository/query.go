@@ -58,3 +58,24 @@ func (r *userRepository) GetByID(id int) (data user.UserCore, err error) {
 
 	return userCore, nil
 }
+
+func (r *userRepository) Update(id int, data user.UserCore) (row int, err error) {
+	var user User
+	gormUserCore := UserCoreToModel(data)
+
+	tx := r.db.First(&user, id)
+	if tx.Error != nil {
+		return -1, errors.New("data not found")
+	}
+
+	tz := r.db.Model(&user).Updates(gormUserCore)
+	if tz.Error != nil {
+		return -1, errors.New("data not found")
+	}
+
+	if tz.RowsAffected == 0 {
+		return 0, err
+	}
+
+	return int(tz.RowsAffected), nil
+}
