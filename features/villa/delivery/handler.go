@@ -33,7 +33,7 @@ func (delivery *VillaDelivery) Create(c echo.Context) error {
 	}
 
 	dataCore := toCore(villaInput)
-	err := delivery.villaService.Create(dataCore)
+	err := delivery.villaService.Create(dataCore, c)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, helper.FailedResponse("Failed insert data"+err.Error()))
 	}
