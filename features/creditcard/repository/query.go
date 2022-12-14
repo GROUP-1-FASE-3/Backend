@@ -35,7 +35,7 @@ func (repo *creditcardRepository) GetById(id int) (data creditcard.CoreCreditCar
 	var IdCreditCard CreditCard
 	var IdCreditCardCore = creditcard.CoreCreditCard{}
 	IdCreditCard.ID = uint(id)
-	tx := repo.db.Preload("User").First(&IdCreditCard, IdCreditCard.ID)
+	tx := repo.db.Preload("Users").First(&IdCreditCard, IdCreditCard.ID)
 	if tx.Error != nil {
 		return IdCreditCardCore, tx.Error
 	}
