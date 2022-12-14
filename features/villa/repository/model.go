@@ -106,6 +106,10 @@ func (dataModel *Villa) toCore() villa.CoreVilla {
 			ID:     dataModel.Rating.ID,
 			Rating: dataModel.Rating.Rating,
 		},
+		User: villa.User{
+			ID:        dataModel.User.ID,
+			User_Name: dataModel.User.User_Name,
+		},
 	}
 }
 
