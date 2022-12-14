@@ -8,7 +8,7 @@ import (
 type User struct {
 	gorm.Model
 	User_Name    string
-	Email        string `gorm:"unique"`
+	Email        string `gorm:"type:varchar(200)"`
 	Password     string
 	Gender       string
 	Phone_Number string
