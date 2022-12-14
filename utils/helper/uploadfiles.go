@@ -35,6 +35,8 @@ func String(length int) string {
 	return autoGenerate(length, charset)
 }
 
+// func AwsConfig()
+
 // Upload Foto Profile User
 func UploadFotoProfile(c echo.Context) (string, error) {
 
@@ -58,7 +60,7 @@ func UploadFotoProfile(c echo.Context) (string, error) {
 
 	input := &s3manager.UploadInput{
 		Bucket:      aws.String(os.Getenv("AWS_BUCKET_NAME")),                           // bucket's name
-		Key:         aws.String("FotoProfile/" + randomStr + "-" + fileheader.Filename), // files destination location
+		Key:         aws.String("fotoprofile/" + randomStr + "-" + fileheader.Filename), // files destination location
 		Body:        file,                                                               // content of the file
 		ContentType: aws.String("image/jpg"),                                            // content type
 	}
@@ -69,7 +71,7 @@ func UploadFotoProfile(c echo.Context) (string, error) {
 }
 
 // UPLOAD FOTO VILLAS (1,2,3) KE AWS S3
-func UploadVillas(c echo.Context, field string) (string, error) {
+func UploadVilla(c echo.Context, field string) (string, error) {
 	file, fileheader, err := c.Request().FormFile(field)
 	if err != nil {
 		log.Print(err)
@@ -84,15 +86,16 @@ func UploadVillas(c echo.Context, field string) (string, error) {
 		Region:      aws.String(os.Getenv("AWS_REGION")),
 		Credentials: credentials.NewStaticCredentials(os.Getenv("ACCESS_KEY_IAM"), os.Getenv("SECRET_KEY_IAM"), ""),
 	}
+
 	s3Session := session.New(s3Config)
 
 	uploader := s3manager.NewUploader(s3Session)
 
 	input := &s3manager.UploadInput{
-		Bucket:      aws.String(os.Getenv("AWS_BUCKET_NAME")),                      // bucket's name
-		Key:         aws.String("Villas/" + randomStr + "-" + fileheader.Filename), // files destination location
-		Body:        file,                                                          // content of the file
-		ContentType: aws.String("image/jpg"),                                       // content type
+		Bucket:      aws.String(os.Getenv("AWS_BUCKET_NAME")),                         // bucket's name
+		Key:         aws.String("testvilla/" + randomStr + "-" + fileheader.Filename), // files destination location
+		Body:        file,                                                             // content of the file
+		ContentType: aws.String("image/jpg"),                                          // content type
 	}
 	res, err := uploader.UploadWithContext(context.Background(), input)
 
