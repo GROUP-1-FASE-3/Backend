@@ -80,3 +80,14 @@ func (repo *villaRepository) DeleteVilla(id int) (row int, err error) {
 	}
 	return int(tx.RowsAffected), nil
 }
+
+func (repo *villaRepository) GetAllByID(id int) (data []villa.CoreVilla, err error) {
+	var villas []Villa
+
+	tx := repo.db.Preload("User").Where("user_id = ?", id).Find(&villas)
+	if tx.Error != nil {
+		return nil, tx.Error
+	}
+	var dataCore = toCoreList(villas)
+	return dataCore, nil
+}

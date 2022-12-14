@@ -110,3 +110,9 @@ func (service *villaService) DeleteVilla(id int) (err error) {
 	}
 	return nil
 }
+
+func (service *villaService) GetAllByID(id int) (data []villa.CoreVilla, err error) {
+	data, err = service.villaRepository.GetAllByID(id)
+	return
+
+}
