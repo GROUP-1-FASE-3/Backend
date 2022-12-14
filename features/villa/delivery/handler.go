@@ -22,7 +22,7 @@ func New(service villa.ServiceInterface, e *echo.Echo) {
 	e.GET("/villas", handler.GetAll, middlewares.JWTMiddleware())
 	e.GET("/villas/:id", handler.GetById, middlewares.JWTMiddleware())
 	e.PUT("/villas/:id", handler.UpdateData, middlewares.JWTMiddleware())
-	e.GET("/villas/user", handler.GetAllByID, middlewares.JWTMiddleware())
+	// e.GET("/villas/user", handler.GetAllByID, middlewares.JWTMiddleware())
 }
 
 // Post New Villa
@@ -89,15 +89,15 @@ func (delivery *VillaDelivery) UpdateData(c echo.Context) error {
 	return c.JSON(http.StatusOK, helper.SuccessResponse("success update data"))
 }
 
-func (delivery *VillaDelivery) GetAllByID(c echo.Context) error {
-	id := middlewares.ExtractTokenUserId(c)
+// func (delivery *VillaDelivery) GetAllByID(c echo.Context) error {
+// 	id := middlewares.ExtractTokenUserId(c)
 
-	results, err := delivery.villaService.GetAllByID(id)
-	if err != nil {
-		return c.JSON(http.StatusBadRequest, helper.FailedResponse("error read data"))
-	}
+// 	results, err := delivery.villaService.GetAllByID(id)
+// 	if err != nil {
+// 		return c.JSON(http.StatusBadRequest, helper.FailedResponse("error read data"))
+// 	}
 
-	dataResponse := fromCoreList(results)
+// 	dataResponse := fromCoreList(results)
 
-	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success read all users", dataResponse))
-}
+// 	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success read all users", dataResponse))
+// }
