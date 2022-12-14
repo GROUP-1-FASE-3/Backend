@@ -12,7 +12,6 @@ type Reservation struct {
 	Start_Date   time.Time
 	End_Date     time.Time
 	VillaPrice   uint
-	Jumlah_malam uint
 	Total_Price  uint
 	VillaID      uint
 	Villa        Villa
