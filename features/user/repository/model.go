@@ -62,10 +62,10 @@ type Villa struct {
 
 type Rating struct {
 	gorm.Model
+	Rating  uint
+	Comment string
 	VillaID uint
 	UserID  uint
-	Rating  string
-	Comment string
 }
 
 func UserCoreToModel(data user.UserCore) User {

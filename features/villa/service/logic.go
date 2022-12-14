@@ -30,3 +30,38 @@ func (service *villaService) Create(input villa.CoreVilla) (err error) {
 	}
 	return nil
 }
+
+// GetAll implements villa.ServiceInterface
+func (service *villaService) GetAll() (data []villa.CoreVilla, err error) {
+	data, err = service.villaRepository.GetAll()
+	return
+
+}
+
+// Get by ID
+func (service *villaService) GetById(id int) (data villa.CoreVilla, err error) {
+	data, errGet := service.villaRepository.GetById(id)
+	if errGet != nil {
+		return data, errors.New("failed get villa by id data, error query")
+	}
+	return data, nil
+}
+
+// Update
+func (service *villaService) UpdateVilla(dataCore villa.CoreVilla, id int) (err error) {
+	errUpdate := service.villaRepository.UpdateVilla(dataCore, id)
+	if errUpdate != nil {
+		return errors.New("failed update data, error query")
+	}
+	return nil
+
+}
+
+// Delete
+func (service *villaService) DeleteVilla(id int) (err error) {
+	_, errDel := service.villaRepository.DeleteVilla(id)
+	if errDel != nil {
+		return errors.New("failed delete villa, error query")
+	}
+	return nil
+}

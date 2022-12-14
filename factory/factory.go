@@ -21,9 +21,9 @@ import (
 	reservationRepo "github.com/GROUP-1-FASE-3/Backend/features/reservation/repository"
 	reservationService "github.com/GROUP-1-FASE-3/Backend/features/reservation/service"
 
-	// ratingDelivery "github.com/GROUP-1-FASE-3/Backend/features/rating/delivery"
-	// ratingRepo "github.com/GROUP-1-FASE-3/Backend/features/rating/repository"
-	// ratingService "github.com/GROUP-1-FASE-3/Backend/features/rating/service"
+	ratingDelivery "github.com/GROUP-1-FASE-3/Backend/features/rating/delivery"
+	ratingRepo "github.com/GROUP-1-FASE-3/Backend/features/rating/repository"
+	ratingService "github.com/GROUP-1-FASE-3/Backend/features/rating/service"
 
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
@@ -51,7 +51,7 @@ func InitFactory(e *echo.Echo, db *gorm.DB) {
 	reservationServiceFactory := reservationService.New(reservationRepoFactory)
 	reservationDelivery.New(reservationServiceFactory, e)
 
-	// ratingRepoFactory := ratingRepo.New(db)
-	// ratingServiceFactory := ratingService.New(ratingRepoFactory)
-	// ratingDelivery.New(ratingServiceFactory, e)
+	ratingRepoFactory := ratingRepo.New(db)
+	ratingServiceFactory := ratingService.New(ratingRepoFactory)
+	ratingDelivery.New(ratingServiceFactory, e)
 }
