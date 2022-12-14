@@ -66,7 +66,7 @@ func (s *userService) Update(id int, input user.UserCore, c echo.Context) (err e
 	var User_images string = "user_images"
 	file, _ := c.FormFile(User_images)
 	if file != nil {
-		res, err := helper.UploadVillas(c, User_images)
+		res, err := helper.UploadVilla(c, User_images)
 		if err != nil {
 			return errors.New("registration failed. cannot upload data")
 		}

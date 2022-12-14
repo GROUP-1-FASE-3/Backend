@@ -23,7 +23,6 @@ type VillaResponse struct {
 	Ratings          RatingResponse `json:"ratings"`
 }
 
-
 type VillaResponseU struct {
 	ID             uint         `json:"id"`
 	Villa_Name     string       `json:"vila_name"`
