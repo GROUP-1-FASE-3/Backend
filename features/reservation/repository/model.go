@@ -1,23 +1,31 @@
 package repository
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"github.com/GROUP-1-FASE-3/Backend/features/reservation"
+	"gorm.io/gorm"
+)
 
 type Reservation struct {
 	gorm.Model
-	Start_Date   string
-	End_Date     string
-	Price        uint
+	Start_Date   time.Time
+	End_Date     time.Time
+	VillaPrice   uint
+	Jumlah_malam uint
 	Total_Price  uint
 	VillaID      uint
+	Villa        Villa
 	UserID       uint
-	CreditCardID uint
 	User         User
+	CreditCardID uint
+	CreditCard   CreditCard
 }
 
 type User struct {
 	gorm.Model
 	User_Name    string
-	Email        string
+	Email        string `gorm:"type:varchar(200)"`
 	Password     string
 	Gender       string
 	Phone_Number string
@@ -28,7 +36,7 @@ type User struct {
 type Villa struct {
 	gorm.Model
 	Villa_Name     string
-	Price          string
+	Price          uint
 	Description    string
 	Address        string
 	Villa_Images1  string
@@ -55,4 +63,44 @@ type CreditCard struct {
 	Year        uint
 	UserID      uint
 	Reservation []Reservation
+}
+
+func ReserveCoreToModel(data reservation.ReservationCore) Reservation {
+	reserveData := Reservation{
+		Start_Date:   data.Start_Date,
+		End_Date:     data.End_Date,
+		VillaPrice:   data.Price,
+		Total_Price:  data.Total_price,
+		VillaID:      data.VillaID,
+		UserID:       data.UserID,
+		CreditCardID: data.CreditCardID,
+	}
+
+	return reserveData
+}
+
+func (dataModel *Reservation) toCore() reservation.ReservationCore {
+	return reservation.ReservationCore{
+		UserID:      dataModel.UserID,
+		ID:          dataModel.ID,
+		Villa:       dataModel.Villa.toCoreV(),
+		Total_price: dataModel.Total_Price,
+		Start_Date:  dataModel.Start_Date,
+		End_Date:    dataModel.End_Date,
+	}
+}
+
+func (dataModel *Villa) toCoreV() reservation.VillaCore {
+	return reservation.VillaCore{
+		Villa_Name: dataModel.Villa_Name,
+		Price:      dataModel.Price,
+	}
+}
+
+func toCoreList(dataModel []Reservation) []reservation.ReservationCore {
+	var dataCore []reservation.ReservationCore
+	for _, v := range dataModel {
+		dataCore = append(dataCore, v.toCore())
+	}
+	return dataCore
 }
