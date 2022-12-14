@@ -34,38 +34,38 @@ func (service *villaService) Create(input villa.CoreVilla, c echo.Context) (err 
 	//Upload File
 	file, _ := c.FormFile(Villa_Images1)
 	if file != nil {
-		res, err := helper.UploadVillas(c, Villa_Images1)
+		res, err := helper.UploadVilla(c, Villa_Images1)
 		if err != nil {
-			return errors.New("Registration Failed. Cannot Upload Data.")
+			return errors.New("Registration Failed. Cannot Upload Data Images1.")
 		}
 		log.Print(res)
 		input.Villa_Images1 = res
 	} else {
-		input.Villa_Images1 = "https://project3bucker.s3.ap-southeast-1.amazonaws.com/dummy-profile-pic.png"
+		input.Villa_Images1 = "https://fmz-airbnb-bucket.s3.ap-southeast-1.amazonaws.com/dummy.png"
 	} // end upload file
 
 	file2, _ := c.FormFile(Villa_Images2)
 	if file2 != nil {
-		res, err := helper.UploadVillas(c, Villa_Images2)
+		res, err := helper.UploadVilla(c, Villa_Images2)
 		if err != nil {
-			return errors.New("Registration Failed. Cannot Upload Data.")
+			return errors.New("Registration Failed. Cannot Upload Data Images2.")
 		}
 		log.Print(res)
 		input.Villa_Images2 = res
 	} else {
-		input.Villa_Images2 = "https://project3bucker.s3.ap-southeast-1.amazonaws.com/dummy-profile-pic.png"
+		input.Villa_Images2 = "https://fmz-airbnb-bucket.s3.ap-southeast-1.amazonaws.com/dummy.png"
 	} // end upload file
 
 	file3, _ := c.FormFile(Villa_Images3)
 	if file3 != nil {
-		res, err := helper.UploadVillas(c, Villa_Images3)
+		res, err := helper.UploadVilla(c, Villa_Images3)
 		if err != nil {
-			return errors.New("Registration Failed. Cannot Upload Data.")
+			return errors.New("Registration Failed. Cannot Upload Data Images3.")
 		}
 		log.Print(res)
 		input.Villa_Images3 = res
 	} else {
-		input.Villa_Images3 = "https://project3bucker.s3.ap-southeast-1.amazonaws.com/dummy-profile-pic.png"
+		input.Villa_Images3 = "https://fmz-airbnb-bucket.s3.ap-southeast-1.amazonaws.com/dummy.png"
 	} // end upload file
 
 	fmt.Println("hasil input create", input)
