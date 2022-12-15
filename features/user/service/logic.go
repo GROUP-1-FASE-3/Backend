@@ -73,7 +73,7 @@ func (s *userService) Update(id int, input user.UserCore, c echo.Context) (err e
 
 		input.User_Images = res
 	} else {
-		input.User_Images = "https://project3bucker.s3.ap-southeast-1.amazonaws.com/dummy-profile-pic.png"
+		input.User_Images = "https://fmz-airbnb-bucket.s3.ap-southeast-1.amazonaws.com/dummy.png"
 	}
 	_, errUpdate := s.userRepository.Update(id, input)
 	if errUpdate != nil {

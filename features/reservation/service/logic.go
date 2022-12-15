@@ -22,21 +22,22 @@ func New(repo reservation.RepositoryInterface) reservation.ServiceInterface {
 }
 
 func (s *reservationService) Check(input reservation.ReservationCore) (availability bool, err error) {
+	if input.Start_Date.Unix() < time.Now().Unix() || input.End_Date.Unix() < time.Now().Unix() {
+		return false, nil
+	}
+
+	if input.Start_Date.Unix() > input.End_Date.Unix() {
+		return false, nil
+	}
+
 	listDate, err := s.reservationRepository.Check(input.VillaID)
 	fmt.Println(listDate)
 	if err != nil {
 		return false, errors.New("error get data")
 	}
 
-	if input.Start_Date.Unix() < time.Now().Unix() || input.End_Date.Unix() < time.Now().Unix() {
-		fmt.Println(input.Start_Date)
-		fmt.Println(input.End_Date)
-		fmt.Println(listDate)
-		return false, nil
-	}
-
-	if input.Start_Date.Unix() > input.End_Date.Unix() {
-		return false, nil
+	if listDate == nil {
+		return true, nil
 	}
 
 	for _, date := range listDate {

@@ -40,7 +40,7 @@ type ServiceInterface interface {
 	GetById(id int) (data CoreVilla, err error)
 	UpdateVilla(input CoreVilla, id int) (err error)
 	DeleteVilla(id int) (err error)
-	// GetAllByID(id int) (data []CoreVilla, err error)
+	GetAllByID(user_id int) (data []CoreVilla, err error)
 }
 
 type RepositoryInterface interface {
@@ -49,5 +49,5 @@ type RepositoryInterface interface {
 	GetById(id int) (data CoreVilla, err error)
 	UpdateVilla(input CoreVilla, id int) (err error)
 	DeleteVilla(id int) (row int, err error)
-	// GetAllByID(id int) (data []CoreVilla, err error)
+	GetAllByID(user_id int) (data []CoreVilla, err error)
 }

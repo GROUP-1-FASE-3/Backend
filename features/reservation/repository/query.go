@@ -26,7 +26,7 @@ func (r *reserveRepository) Check(id uint) (dateReservation []reservation.DateRe
 	}
 
 	if tx.RowsAffected == 0 {
-		return nil, errors.New("failed read data")
+		return nil, nil
 	}
 
 	return dates, nil
