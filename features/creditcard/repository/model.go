@@ -14,6 +14,7 @@ type CreditCard struct {
 	Month       uint
 	Year        uint
 	UserID      uint
+	User        User
 	Reservation []Reservation
 }
 
@@ -25,7 +26,7 @@ type User struct {
 	Gender       string
 	Phone_Number string
 	User_Images  string
-	CreditCard   CreditCard
+	CreditCard   []CreditCard
 }
 
 type Reservation struct {
@@ -62,6 +63,7 @@ func (dataModel *CreditCard) toCore() creditcard.CoreCreditCard {
 		Cvv:    dataModel.Cvv,
 		Month:  dataModel.Month,
 		Year:   dataModel.Year,
+		User:   dataModel.User.toCore2(),
 	}
 }
 

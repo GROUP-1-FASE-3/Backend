@@ -21,6 +21,7 @@ type ServiceInterface interface {
 	GetById(id int) (data CoreCreditCard, err error)
 	UpdateCreditCard(input CoreCreditCard, id int) (err error)
 	DeleteCreditCard(id int) (err error)
+	GetByUserId(id int) (data []CoreCreditCard, err error)
 }
 
 type RepositoryInterface interface {
@@ -28,4 +29,5 @@ type RepositoryInterface interface {
 	GetById(id int) (data CoreCreditCard, err error)
 	UpdateCreditCard(input CoreCreditCard, id int) (err error)
 	DeleteCreditCard(id int) (row int, err error)
+	GetByUserId(id int) (data []CoreCreditCard, err error)
 }
