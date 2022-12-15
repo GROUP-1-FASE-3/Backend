@@ -20,11 +20,11 @@ type CoreVilla struct {
 	Detail_Wifi      string
 	Detail_Workspace string
 	UserID           uint
-	User             User
+	User             CoreUser
 	Rating           CoreRating
 }
 
-type User struct {
+type CoreUser struct {
 	ID        uint
 	User_Name string
 }
