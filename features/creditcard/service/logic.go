@@ -58,3 +58,11 @@ func (service *creditcardService) DeleteCreditCard(id int) (err error) {
 	}
 	return nil
 }
+
+func (service *creditcardService) GetByUserId(id int) (data []creditcard.CoreCreditCard, err error) {
+	data, errGet := service.creditcardRepository.GetByUserId(id)
+	if errGet != nil {
+		return data, errors.New("failed get creditcard by id data, error query")
+	}
+	return data, nil
+}

@@ -21,6 +21,7 @@ func New(service creditcard.ServiceInterface, e *echo.Echo) {
 
 	e.POST("/creditcards", handler.Create, middlewares.JWTMiddleware())
 	e.GET("/creditcards/:id", handler.GetById, middlewares.JWTMiddleware())
+	e.GET("/creditcards/user", handler.GetByUId, middlewares.JWTMiddleware())
 	e.PUT("/creditcards/:id", handler.UpdateData, middlewares.JWTMiddleware())
 	e.DELETE("/creditcards/:id", handler.DeleteCreditCard, middlewares.JWTMiddleware())
 }
@@ -91,4 +92,15 @@ func (delivery *CreditCardDelivery) DeleteCreditCard(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, helper.SuccessResponse("success delete data"))
 
+}
+
+func (delivery *CreditCardDelivery) GetByUId(c echo.Context) error {
+	id := middlewares.ExtractTokenUserId(c)
+
+	IdCreditCard, err := delivery.creditcardService.GetByUserId(id)
+	dataResponse := fromCoreList(IdCreditCard)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error binding data "))
+	}
+	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success get users", dataResponse))
 }

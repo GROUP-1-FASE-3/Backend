@@ -28,6 +28,7 @@ func fromCore(dataCore creditcard.CoreCreditCard) CreditCardResponse {
 		Cvv:    dataCore.Cvv,
 		Month:  dataCore.Month,
 		Year:   dataCore.Year,
+		Users:  fromCore2(dataCore.User),
 	}
 }
 

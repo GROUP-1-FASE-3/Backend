@@ -35,7 +35,7 @@ func (repo *creditcardRepository) GetById(id int) (data creditcard.CoreCreditCar
 	var IdCreditCard CreditCard
 	var IdCreditCardCore = creditcard.CoreCreditCard{}
 	IdCreditCard.ID = uint(id)
-	tx := repo.db.Preload("Users").First(&IdCreditCard, IdCreditCard.ID)
+	tx := repo.db.Preload("User").First(&IdCreditCard, IdCreditCard.ID)
 	if tx.Error != nil {
 		return IdCreditCardCore, tx.Error
 	}
@@ -68,4 +68,14 @@ func (repo *creditcardRepository) DeleteCreditCard(id int) (row int, err error) 
 		return -1, errors.New("delete creditcard by id failed")
 	}
 	return int(tx.RowsAffected), nil
+}
+
+func (repo *creditcardRepository) GetByUserId(id int) (data []creditcard.CoreCreditCard, err error) {
+	var CreditCard []CreditCard
+	tx := repo.db.Preload("User").Where("user_id = ?", id).Find(&CreditCard)
+	if tx.Error != nil {
+		return data, tx.Error
+	}
+	CreditCardCore := toCoreList(CreditCard)
+	return CreditCardCore, nil
 }
