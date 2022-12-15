@@ -22,6 +22,7 @@ func New(service villa.ServiceInterface, e *echo.Echo) {
 	e.GET("/villas", handler.GetAll, middlewares.JWTMiddleware())
 	e.GET("/villas/:id", handler.GetById, middlewares.JWTMiddleware())
 	e.PUT("/villas/:id", handler.UpdateData, middlewares.JWTMiddleware())
+	e.DELETE("/villas/:id", handler.DeleteVilla, middlewares.JWTMiddleware())
 	// e.GET("/villas/user", handler.GetAllByID, middlewares.JWTMiddleware())
 }
 
@@ -101,3 +102,18 @@ func (delivery *VillaDelivery) UpdateData(c echo.Context) error {
 
 // 	return c.JSON(http.StatusOK, helper.SuccessWithDataResponse("success read all users", dataResponse))
 // }
+
+func (delivery *VillaDelivery) DeleteVilla(c echo.Context) error {
+	id, errConv := strconv.Atoi(c.Param("id"))
+	if errConv != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("Error conv data "+errConv.Error()))
+	}
+
+	errDel := delivery.villaService.DeleteVilla(id)
+	if errDel != nil {
+		return c.JSON(http.StatusBadRequest, helper.FailedResponse("error delete villa"+errDel.Error()))
+	}
+
+	return c.JSON(http.StatusOK, helper.SuccessResponse("success delete data"))
+
+}
