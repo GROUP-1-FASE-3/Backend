@@ -6,7 +6,7 @@ About the project :
 An application which enables users to both book a villas and provide villas for others to rent.
 
 Features :
-- Authentication
+- Authentication / Login
 - User: 
     - Create User (Register New User)
     - Get User by ID
