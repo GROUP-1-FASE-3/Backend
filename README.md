@@ -8,14 +8,14 @@ An application which enables users to both book a room and provide rooms for oth
 Features :
 - Authentication
 - User: 
-    - Create User
+    - Create User (Register New User)
     - Get User by ID
     - Delete User
     - Update User
 - Villa :
     - Create Villa
-    - Get all Villa
-    - Get Villa by id
+    - Get all Villa (Homepage)
+    - Get Villa by UserID
     - Update Villa
     - Delete Villa
    
