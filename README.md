@@ -2,6 +2,9 @@
 
 API AIRBNB APPLICATION
 
+About the project :
+An application which enables users to both book a room and provide rooms for others to rent.
+
 Features :
 - Authentication
 - User: 
